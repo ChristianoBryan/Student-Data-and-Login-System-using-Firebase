@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Text, TextInput, View } from "react-native";
-import { checkUser, loginUser, logoutUser } from "../services/authService";
+import { checkUser, loginUser, logoutUser } from "../../services/authService";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -33,6 +33,8 @@ export default function LoginScreen() {
       const user = await loginUser(cleanEmail, password);
       console.log("Login success:", user);
       alert(`Login berhasil sebagai ${user.email}`);
+      setEmail("");
+      setPassword("");
     } catch (e: unknown) {
       console.log("Login error:", e);
       const msg = e instanceof Error ? e.message : JSON.stringify(e);
@@ -51,27 +53,28 @@ export default function LoginScreen() {
   }
 
   return (
-    <View style={{ padding: 20 }}>
+    <View style={{ padding: 20, maxWidth: 400, }}>
+      <Text style={{fontFamily: "Segoe UI", fontSize: 50, textAlign:"center", }}>Halaman Login</Text>
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
         keyboardType="email-address"
-        style={{ marginBottom: 25, marginTop: 50, borderWidth: 1, padding: 5, color:"black", backgroundColor:"white" }}
+        style={{ marginBottom: 25, marginTop: 30, borderWidth: 2, padding: 5, color:"black", backgroundColor:"#c9ecf9ff", borderRadius: 5}}
       />
       <TextInput
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={{ marginBottom: 25, borderWidth: 1, padding: 5, color:"black", backgroundColor:"white"  }}
+        style={{ marginBottom: 25, borderWidth: 2, padding: 5, color:"black", backgroundColor:"#d1e8f1ff", borderRadius: 5}}
       />
       <View style={{ marginBottom: 10 }}>
         <Button title="Login" onPress={handleLogin} />
       </View>
       <Button title="Logout" onPress={handleLogout} />
-      <Text style={{ marginTop: 10, color:"white" }}>{loggedIn ? "Anda telah login" : "Anda belum login!"}</Text>
+      <Text style={{ marginTop: 10, color:"black" }}>{loggedIn ? "Anda telah login" : "Anda belum login!"}</Text>
     </View>
   );
 }

@@ -3,8 +3,8 @@ import { getAuth } from "firebase/auth";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Button, FlatList, StyleSheet, Text, TextInput, View } from "react-native";
-import { db } from "../firebaseConfig";
-import { checkUser } from "../services/authService";
+import { db } from "../../firebase/firebaseConfig";
+import { checkUser } from "../../services/authService";
 
 const getUser = async () => {
   const auth = getAuth();
@@ -111,13 +111,14 @@ const styles = StyleSheet.create({
   containerSemua:{
     flex:1,
     padding: 20,
-    backgroundColor: "#baebbaff"
+    backgroundColor: "#baebbaff",
+    maxWidth: 400
   },
 
   judul:{
     borderWidth: 1,
     textAlign: "center",
-    marginTop: 50,
+    marginTop: 25,
     padding: 5,
     color:"white",
     fontFamily: "sans-serif-black",
